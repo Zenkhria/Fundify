@@ -44,10 +44,10 @@ public class QueryExecutions {
     }
     
     public ResultSet getPaymentsDataForGoal(String goal) throws SQLException {
-        String query = "SELECT u.userName, p.amountPaid, p.datePaid " +
+        String query = "SELECT u.userName AS UserName, p.amountPaid, p.datePaid " +
                        "FROM Payments p " +
                        "JOIN Goals g ON p.goalID = g.goalID " +
-                       "JOIN UserAuthen u ON g.userID = u.userID " +
+                       "JOIN UserAuthen u ON p.userID = u.userID " +
                        "WHERE g.goal = ?";
         Connection connection = DatabaseConnection.getConnection();
         PreparedStatement pstmt = null;
