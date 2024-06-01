@@ -1,0 +1,26 @@
+Database Creator --
+
+CREATE TABLE UserAuthen (
+  userID int not null auto_increment primary key,
+  userName varchar(20) not null,
+  userPass varchar(20) not null
+);
+
+CREATE TABLE Goals (
+  goalID int not null auto_increment primary key,
+  goal varchar(50) not null,
+  paymentGoal int not null,
+  userID int,
+  foreign key (userID) references UserAuthen(userID)
+);
+
+CREATE TABLE Payments (
+  paymentID int not null auto_increment primary key,
+  amountPaid int not null,
+  datePaid date not null,
+  totalPaidAmount int,
+  goalID int,
+  userID int,
+  foreign key (goalID) references Goals(goalID),
+  foreign key (userID) references userAuthen(userID)
+);

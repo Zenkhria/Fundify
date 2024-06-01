@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/FDS";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/fundify";
     private static final String USER = "root";
     private static final String PASSWORD = "";
     private static Connection connection = null;
@@ -17,11 +17,14 @@ public class DatabaseConnection {
     public static Connection getConnection() {
         if (connection == null) {
             try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
                 System.out.println("Connection established");
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Failed to establish connection");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
         return connection;
